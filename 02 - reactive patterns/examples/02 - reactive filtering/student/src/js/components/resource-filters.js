@@ -59,8 +59,12 @@ class ResourceFilters extends HTMLElement {
   }
 
   // - clicking categories (Trigger live changes based on the filter options)
+  //      - change click function of event
+  //      - adjust click button to fire/trigger filter
   // - clicking submission/filter
   // - submitting filters to trigger an event which will send a message based upon the filter input
+  //      - build object to hold the filter state
+  //      - create and fire custom event that fires the appropriate information based on the filter
 
   render() {
     this.shadowRoot.appendChild(template.content.cloneNode(true));

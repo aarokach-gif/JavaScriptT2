@@ -19,6 +19,18 @@ template.innerHTML = `
 class ResourceResults extends HTMLElement {
   #results = [];
 
+  // If I'm filtering, I'll need
+  // - one place to store and load the full dataset results
+  // - add another place to store the filtered dataset
+  // - this is also means I have to render from the filtered dataset
+
+  // I need a way to store the filter data that's inmcomimg from filter event
+  //  - category click (for this example, it'll change live)
+  //  - current filters submitted
+
+  // I need a method for applying the filters to the results
+  // I need to modify my render method accordingly
+
   constructor() {
     super();
     this._handleResultClick = this._handleResultClick.bind(this); 
@@ -37,7 +49,7 @@ class ResourceResults extends HTMLElement {
       button.classList.add('active');
 
       const resultID = button.getAttribute('data-id');
-      const result = this.#results.find(r => r.id === resultID);  // note that we're finding the data object from the array, not the UI row!
+      const result = this.#results.find(r => r.id === resultID); // note that we're finding the data object from the array, not the UI row!
 
       const resultSelectedEvent = new CustomEvent(
         'resource-selected',
