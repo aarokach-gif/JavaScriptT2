@@ -1,3 +1,5 @@
+// - Template will not change as it is a normal input interface and doesn't require adjustments.
+
 const template = document.createElement('template');
 template.innerHTML = `
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -55,6 +57,10 @@ class ResourceFilters extends HTMLElement {
   connectedCallback() {
     this.render();
   }
+
+  // - clicking categories (Trigger live changes based on the filter options)
+  // - clicking submission/filter
+  // - submitting filters to trigger an event which will send a message based upon the filter input
 
   render() {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
