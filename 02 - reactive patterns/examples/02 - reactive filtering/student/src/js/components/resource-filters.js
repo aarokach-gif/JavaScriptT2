@@ -65,6 +65,18 @@ class ResourceFilters extends HTMLElement {
   // - submitting filters to trigger an event which will send a message based upon the filter input
   //      - build object to hold the filter state
   //      - create and fire custom event that fires the appropriate information based on the filter
+  on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(callback);
+  }
+
+  emit(eventName, data) {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach(callback => callback(data));
+    }
+  }
 
   render() {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
