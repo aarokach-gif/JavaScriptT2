@@ -30,6 +30,18 @@ class ResourceResults extends HTMLElement {
 
   // I need a method for applying the filters to the results
   // I need to modify my render method accordingly
+   on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(callback);
+  }
+
+  emit(eventName, data) {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach(callback => callback(data));
+    }
+  }
 
   constructor() {
     super();
