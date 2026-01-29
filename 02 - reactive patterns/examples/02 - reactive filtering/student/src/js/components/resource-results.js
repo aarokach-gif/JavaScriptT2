@@ -33,7 +33,7 @@ class ResourceResults extends HTMLElement {
 
   constructor() {
     super();
-    this._handleResultClick = this._handleResultClick.bind(this); 
+    this._handleResultClick = this._handleResultClick.bind(this);
     this.attachShadow({ mode: 'open' });
   }
 
@@ -57,7 +57,7 @@ class ResourceResults extends HTMLElement {
           detail: { result },
           bubbles: true,
           composed: true,
-        }
+        },
       );
 
       this.dispatchEvent(resultSelectedEvent);
@@ -69,14 +69,13 @@ class ResourceResults extends HTMLElement {
     this.render();
   }
 
-  disconnectedCallback () {
+  disconnectedCallback() {
     this.shadowRoot.removeEventListener('click', this._handleResultClick);
   }
-  
-  render() {
-    const content = template.content.cloneNode(true)
-    const listGroup = content.querySelector('.list-group');
 
+  render() {
+    const content = template.content.cloneNode(true);
+    const listGroup = content.querySelector('.list-group');
 
     if (this.#results.length) {
       const resultsHTML = this.#results.map(
@@ -88,11 +87,10 @@ class ResourceResults extends HTMLElement {
           </div>
           <p class="mb-1 small text-body-secondary">${result.summary}</p>
           <small class="text-body-secondary">${result.location}</small>
-        </button>`
-      ); 
+        </button>`,
+      );
 
       listGroup.innerHTML = resultsHTML.join(''); // resultsHTML is an array, so combine each HTML blob back-to-back into a string
-
     } else {
       listGroup.innerHTML = `
         <div class="list-group-item">
