@@ -23,6 +23,46 @@ class ResourceResults extends HTMLElement {
   // - one place to store and load the full dataset results
   // - add another place to store the filtered dataset
   // - this is also means I have to render from the filtered dataset
+  // create a second constructor to store data
+  constructor() {
+    this.events = {}
+    this.allData = [];
+    this.filteredData = [];
+  }
+      on(eventName, callback) {
+        if (!this.events[eventName]) {
+            this.events[eventName] = [];
+        }
+        this.events[eventName].push(callback);
+    }
+
+    emit(eventName, data) {
+        if (this.events[eventName]) {
+            this.events[eventName].forEach(callback => callback(data));
+        }
+    }
+
+    // Load data once
+    setData(data) {
+        this.allData = data;
+        this.filteredData = data; // Initially same
+        this.emit('dataUpdated', this.filteredData);
+    }
+
+    // Filter functionality
+    filterData(query) {
+        if (!query) {
+            this.filteredData = this.allData;
+        } else {
+            // Perform filtering on the original data, store in filteredData
+            this.filteredData = this.allData.filter(item => 
+                item.name.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+        // 3. Render from the filtered dataset
+        this.emit('dataUpdated', this.filteredData);
+    }
+
 
   // I need a way to store the filter data that's inmcomimg from filter event
   //  - category click (for this example, it'll change live)
@@ -30,18 +70,6 @@ class ResourceResults extends HTMLElement {
 
   // I need a method for applying the filters to the results
   // I need to modify my render method accordingly
-   on(eventName, callback) {
-    if (!this.events[eventName]) {
-      this.events[eventName] = [];
-    }
-    this.events[eventName].push(callback);
-  }
-
-  emit(eventName, data) {
-    if (this.events[eventName]) {
-      this.events[eventName].forEach(callback => callback(data));
-    }
-  }
 
   constructor() {
     super();
