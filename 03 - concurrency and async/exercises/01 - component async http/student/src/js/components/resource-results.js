@@ -36,6 +36,15 @@ class ResourceResults extends HTMLElement {
 
   // TODO: Stage 2: Observe the `source` attribute
 
+  static get oberseveredAttributes() {
+    return ['some observed component property']
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    
+  }
+
+
   set results(data) {
     this.#results = data;
     this.#filteredResults = [...data];
