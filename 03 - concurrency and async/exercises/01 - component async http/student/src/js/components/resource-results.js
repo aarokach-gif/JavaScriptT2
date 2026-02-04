@@ -37,13 +37,18 @@ class ResourceResults extends HTMLElement {
   // TODO: Stage 2: Observe the `source` attribute
 
   static get oberseveredAttributes() {
-    return ['some observed component property']
+    return ['source']
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    
+    if (name === 'source' && oldVal != newVall) {
+      this.#fetchData(newValue);
+    }
   }
 
+  async #fetchData() {
+
+  }
 
   set results(data) {
     this.#results = data;
