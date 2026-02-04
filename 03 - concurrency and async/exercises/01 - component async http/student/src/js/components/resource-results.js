@@ -42,12 +42,23 @@ class ResourceResults extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'source' && oldVal != newVall) {
-      this.#fetchData(newValue);
+      if (this.isConnected) {
+        this.#fetchData(newVal);
+      }
     }
   }
 
   async #fetchData() {
-
+    try {
+      const respone = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Network response failed: ${response.statusText}`)
+      }
+      const data = await response.json();
+      this.result = data;
+    } catch (error) {
+      console.error('Failed to get data ', error)
+    }
   }
 
   set results(data) {
@@ -61,7 +72,7 @@ class ResourceResults extends HTMLElement {
       ...this.#filters,
       ...filters,
     };
-    this.#applyFilters();
+    this.#applyFilters(url);
   }
 
   // TODO: Stage 2: Private method to fetch data from the provided source URL
