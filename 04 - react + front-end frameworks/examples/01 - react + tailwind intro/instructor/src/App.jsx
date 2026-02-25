@@ -18,7 +18,7 @@ function App() {
     // If it were just one parent component and a bunch of stuff nested under it, I don't need that.
     // This lets us avoid nesting everything under plain divs and complicating our DOM tree.
     <>
-      <Header tagline="idk"/>
+      <Header tagline="They made me come up with a tagline, but I have no imagination." />
       {/* Within a JSX block, comments look like this. I'm using Tailwind classes in this div for auto-spacing! */}
       <div className="flex flex-col gap-6 lg:grid lg:grid-cols-3 lg:items-stretch">
         <div className="w-full">
@@ -32,8 +32,7 @@ function App() {
         </div>
       </div>
     </>
-
-  )
+  );
 }
 
 export default App;
