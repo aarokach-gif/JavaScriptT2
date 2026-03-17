@@ -5,7 +5,6 @@ const API_BASE_URL = 'http://localhost:3000';  // our local backend REST API
 
 
 export function useResources() {
-    console.log("firing hook!!!")
     // 1. state
     const [resources, setResources] = useState([]);
     const [isLoading, setIsLoading] = useState(true);  // so we can conditionally render e.g. loading msg
