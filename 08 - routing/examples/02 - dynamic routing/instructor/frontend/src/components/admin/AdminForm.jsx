@@ -23,6 +23,9 @@ export default function AdminForm({
 
   const navigate = useNavigate(); // lets you programmatically route to a path
 
+  const isEditing = Boolean(resourceId);
+  console.log("AdminForm: isEditing", isEditing)
+
   const resetForm = () => {
     setFormData({
       title: '',
@@ -43,7 +46,7 @@ export default function AdminForm({
       // console.log(resources)
 
       // 1. no resourceId -> I'm at /admin/ -> probably creating a new one
-      if (!resourceId) {
+      if (!isEditing) {
         resetForm();
       }
 
@@ -192,7 +195,7 @@ export default function AdminForm({
 					      type="submit"
 					      className="rounded bg-sky-600 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-700"
 					    >
-					      Add Resource
+					      {isEditing ? "Update" : "Add"} Resource
 					    </button>
 					  </div>
 					</form>
